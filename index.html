@@ -21,7 +21,7 @@
                     <!--give location to map API-->
             <input id="distRadius" name="distRadius" placeholder="How big of a radius?"><br>
             <!-- add section to add fiters for search -->
-            <select name="services" id="services">
+            <select name="services" id="services" multiple>
                 <option value="Pet Stores">Pet Stores</option><!--pet stores-->
                 <option value="Pet Stores">Veterinarian</option><!-- vet-->
                 <option value="Pet Stores">Dog Park</option><!--dog parks-->
@@ -65,6 +65,10 @@
         script.setAttribute("src", apiURL);
         document.getElementsByTagName("head")[0].appendChild(script);
     </script>
-    
+
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <script src="./js/OpenWeather.js"></script>
 </html>
