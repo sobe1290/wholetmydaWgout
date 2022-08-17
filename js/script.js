@@ -9,16 +9,21 @@ var submitbtn = document.querySelector("#submitbtn");
 
     
 //create function to grab click to submit form
-submitbtn.addEventListener(initMap());
-    // -prevent default for form
+submitbtn.addEventListener(); //add Karim's function
+   
     // -set location to a variable and then send it to needed function ***grab from Karim
 
-
 //create function to record user choices
-    //grab the user input for location
+function petCriteria() {
+    let userCity =userLocation.value//grab the user input for location
     //grab the checked boxes
-
-
+    let checkboxes = document.querySelectorAll("input:checked");
+    let criteria = [];
+    checkboxes.forEach((checkbox) => {
+        criteria.push(checkbox.value) 
+    };
+    return userCity, 
+}
 
 //create function to send user choices to correct spot(create variable to go to)
 
