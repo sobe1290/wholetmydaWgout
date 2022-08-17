@@ -1,13 +1,7 @@
-<<<<<<< Updated upstream
-=======
+
 /* Set the size of the div element that contains the map */
 #map {
     height: 400px;
     /* The height is 400 pixels */
     width: 35%;
     /* The width is the width of the web page */
-  }
-  i {
-    font-size: 30px;
-  }
->>>>>>> Stashed changes

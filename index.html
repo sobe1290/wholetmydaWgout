@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./assets/css/reset.css"/>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.1.2/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"/>
+    <script src="https://kit.fontawesome.com/1b0da08359.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/style.css"/>
     <title>Who Let My DaWg Out</title>
 </head>
@@ -35,21 +35,25 @@
         <h1>How do you want to let out your dog?</h1>
         <form class="navBar">
             <!-- add input section to get location-->
-            <input id="userLocat" name="userLocat" placeholder="Enter in a Location"><br>
             <label for="userLocat">Location:</label>
+            <input id="userLocat" name="userLocat" placeholder="Enter in a Location"><br>
                     <!--give location to map API-->
-            <input id="distRadius" name="distRadius" placeholder="How big of a radius?"><br>
+            
             <!-- add section to add fiters for search -->
-            <select name="services" id="services">
-                <option value="Pet Stores">Pet Stores</option><!--pet stores-->
-                <option value="Pet Stores">Veterinarian</option><!-- vet-->
-                <option value="Pet Stores">Dog Park</option><!--dog parks-->
-                <option value="Pet Stores">Parks and Hikes</option><!--parks and hikes-->
-            </select>
+            <input type="checkbox" id="box1" name="Petstores">
+            <label for="Petstores">Petstores</label>
+            <input type="checkbox" id="box2" name="Veterinarians">
+            <label for="Veterinarians">Veterinarians</label><br>
+            <input type="checkbox" id="box3" name="Dog_Parks">
+            <label for="Dog_Parks">Dog Parks</label>
+            <input type="checkbox" id="box4" name="Hikes">
+            <label for="Hikes">Hikes</label><br>
             <!-- add submit button-->
 
             
         </form>
+
+        <div id="map"></div>
 
 
 
@@ -59,22 +63,31 @@
     Bird, Bird, Bird.
     Bird is the word.
     <i class="fa-solid fa-dog"></i>
-    <i class="fa-solid fa-dog-leashed"></i>
+    <i class="fa-solid fa-dog fa-1x"></i>
+    <i class="fa-solid fa-dog fa-5x"></i>
+    <i class="fa-solid fa-dog fa-10x"></i>
+    <i class="fa-solid fa-dog fa-beat"></i>
+    <i class="fa-solid fa-dog fa-fade"></i>
+    <i class="fa-solid fa-dog fa-bounce"></i>
+    <i class="fa-solid fa-dog fa-flip"></i>
+    <i class="fa-solid fa-dog fa-shake"></i>
+    <i class="fa-solid fa-dog fa-spin"></i>
     <i class="fa-solid fa-shield-dog"></i>
-    <i class="fa-brands fa-deploydog"></i>
     <i class="fa-solid fa-hotdog"></i>
     <i class="fa-solid fa-bone"></i>
-    <i class="fa-solid fa-bone-break"></i>
     <i class="fa-solid fa-bowl-food"></i>
     <i class="fa-solid fa-paw"></i>
-    <i class="fa-solid fa-paw-simple"></i>
-    <i class="fa-solid fa-paw-simple"></i>
-    <i class="fa-solid fa-sausage"></i>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script type="text/javascript" src="./js/script.js"></script> 
-    <script async
-    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places&callback=initMap">
+    <!-- Import env file -->
+    <script src=".env"></script>
+    <script type="text/javascript" src="./js/maps.js"></script> 
+    <script>
+    const apiURL = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places&callback=initMap`
+    var script = document.createElement("script");
+        script.setAttribute("src", apiURL);
+        document.getElementsByTagName("head")[0].appendChild(script);
     </script>
 
 </body>
