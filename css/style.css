@@ -5,3 +5,7 @@
     width: 35%;
     /* The width is the width of the web page */
   }
+  body {
+    font-family: 'Tangerine', serif;
+    font-size: 24px;
+  }
