@@ -13,3 +13,4 @@ $.ajax({
     console.log(URL);
 
 })
+$(document).foundation();
