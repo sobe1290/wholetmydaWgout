@@ -2,8 +2,6 @@
 const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
 const mainDate = moment().format("MMM Do, YYYY");
 
-let lat = 47.60
-let long = -122.33
 
 $("#cityInputSubmit").on("click", () => {
     const cityName = $("#cityInput").val();
@@ -19,59 +17,60 @@ $("#cityInputSubmit").on("click", () => {
     console.log(response.coord);
     console.log(URL);
     var lat = response.coord.lat;
-    var lon = response.coord.lon;
+    var long = response.coord.lon;
+    console.log('Latitutde:', lat)
+    console.log('Longitude:' , long)
 
-    initMap();
+    var map;
+    var service;
+    var infowindow; 
+    
+    function initMap() {
+        var geoLocation = new google.maps.LatLng(lat, long);
+      
+        infowindow = new google.maps.InfoWindow();
+      
+        map = new google.maps.Map(
+            document.getElementById('map'), {center: geoLocation, zoom: 13});
+      
+        var request = {
+          location: geoLocation,
+          radius: selectedRadius,
+          query: searchTerm,
+        };
+      
+        service = new google.maps.places.PlacesService(map);
+        service.textSearch(request, callback);
+      }
+
+      initMap();
+      
+      function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          for (var i = 0; i < results.length; i++) {
+            var place = results[i];
+            createMarker(results[i]);
+          }
+        }
+      }
+      
+      function createMarker(place) {
+      
+          new google.maps.Marker({
+              position: place.geometry.location,
+              map: map
+          });
+      }
 })
 
-
-
 });
-console.log('Latitutde:', lat)
-console.log('Longitude:' , long)
 
 
-var map;
-var service;
-var infowindow;
+
 
 let searchTerm = 'Veterinarian' //Shep change this
 let selectedRadius = '500' //Shep change this
 
-//make function to run initMap
 
-function initMap() {
-  var geoLocation = new google.maps.LatLng(lat, long);
 
-  infowindow = new google.maps.InfoWindow();
-
-  map = new google.maps.Map(
-      document.getElementById('map'), {center: geoLocation, zoom: 13});
-
-  var request = {
-    location: geoLocation,
-    radius: selectedRadius,
-    query: searchTerm,
-  };
-
-  service = new google.maps.places.PlacesService(map);
-  service.textSearch(request, callback);
-}
-
-function callback(results, status) {
-  if (status == google.maps.places.PlacesServiceStatus.OK) {
-    for (var i = 0; i < results.length; i++) {
-      var place = results[i];
-      createMarker(results[i]);
-    }
-  }
-}
-
-function createMarker(place) {
-
-    new google.maps.Marker({
-        position: place.geometry.location,
-        map: map
-    });
-}
 
