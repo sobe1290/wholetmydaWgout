@@ -19,6 +19,9 @@ var lat = response.coord.lat;
 var lon = response.coord.lon;
 
 })
+
+initMap();
+
 });
 console.log('Latitutde:', lat)
 console.log('Longitude:' , long)
