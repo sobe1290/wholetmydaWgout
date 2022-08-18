@@ -66,3 +66,4 @@ for (let i = 0; i < 5 ; i++) { //textEntered.length
  }
  
  //create function to send user choices to correct spot(create variable to go to)
+
