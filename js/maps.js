@@ -1,3 +1,4 @@
+
 var map;
 var service;
 var infowindow;
@@ -42,3 +43,4 @@ function createMarker(place) {
         map: map
     });
 }
+
