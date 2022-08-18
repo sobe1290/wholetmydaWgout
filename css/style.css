@@ -6,4 +6,38 @@
     width: 35%;
     /* The width is the width of the web page */
     box-shadow: 10px 10px 5px grey;
+    margin-left: 150px;
+    margin-bottom: 150px;
 }
+body form {
+    font-family: 'oswald', sans-serif;
+    font-size: xx-large;
+}
+h1 {
+    font-family: 'oswald', sans-serif;
+    font-size: 60px;
+    text-align: center;
+    background-color:white;
+    height: 100px;
+    width: 100%;
+}
+
+div.transbox {
+    margin: 30px;
+    background-color: #ffffff;
+    border: 1px solid black;
+    opacity: 0.6;
+  }
+  
+  div.transbox label {
+    margin: 5%;
+    font-weight: bold;
+ 
+    color: #000000;
+  }
+  form {
+    padding: 150px;
+  }
+  .my-center {
+    text-align: center;
+  }
