@@ -2,6 +2,9 @@
 const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
 const mainDate = moment().format("MMM Do, YYYY");
 
+let lat = 47.60
+let long = -122.33
+
 $("#cityInputSubmit").on("click", () => {
     const cityName = $("#cityInput").val();
     $("#cityInput").val("");
@@ -32,8 +35,8 @@ var map;
 var service;
 var infowindow;
 
-var searchTerm = 'Veterinarian' //Shep change this
-var selectedRadius = '500' //Shep change this
+let searchTerm = 'Veterinarian' //Shep change this
+let selectedRadius = '500' //Shep change this
 
 //make function to run initMap
 
