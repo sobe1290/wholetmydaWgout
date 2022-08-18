@@ -15,12 +15,13 @@ $("#cityInputSubmit").on("click", () => {
     console.log(response.weather)
     console.log(response.coord);
     console.log(URL);
-var lat = response.coord.lat;
-var lon = response.coord.lon;
+    var lat = response.coord.lat;
+    var lon = response.coord.lon;
 
+    initMap();
 })
 
-initMap();
+
 
 });
 console.log('Latitutde:', lat)
