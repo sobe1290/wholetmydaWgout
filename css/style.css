@@ -10,8 +10,14 @@
 body {
     font-family: 'Tangerine', cursive;
     font-size: 24px;
+    background-color: bisque;
 }
 h1 {
     font-family: 'Tangerine', cursive;
     font-size: 32px;
+}
+form {
+    padding: 150px;
+    position: sticky;
+    background-color: bisque;
 }
