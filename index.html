@@ -6,60 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--link rel="stylesheet" href="./assets/css/reset.css"/-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald">
+
     <script src="https://kit.fontawesome.com/1b0da08359.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./css/style.css"/>
     <title>Who Let My DaWg Out</title>
 </head>
 
 <body>
+
+  <style> 
+  body {
+     background-image: url(https://newevolutiondesigns.com/images/freebies/4k-dog-wallpaper-1.jpg);
+     background-repeat: no-repeat;
+    background-size: 103%;
+    background-attachment: fixed;
+        }
+  </style>
     <aside class="sideBar">
         <div id="container">
         <!-- to do: complete form and such-->
-        <h1>How do you want to let out your dog?</h1>
-        <form class="navBar">
-            <!-- add input section to get location-->
-            <!-- <label for="userLocat">Location:</label>
-            <input id="userLocat" name="userLocat" placeholder="Enter in a Location"><br> -->
-                    <!--give location to map API-->
-                <!-- add section to add fiters for search -->
-            <!-- <div id="petpref">
-                <input type="checkbox" id="box1" name="chckbx" value="Petstores">
-                <label for="Petstores">Petstores</label>
-                <input type="checkbox" id="box2" name="chckbx" value="Veterinarians">
-                <label for="Veterinarians">Veterinarians</label><br>
-                <input type="checkbox" id="box3" name="chckbx" value="Dog_park">
-                <label for="Dog_Parks">Dog Parks</label>
-                <input type="checkbox" id="box4" name="chckbx" value="Hikes">
-                <label for="Hikes">Hikes</label><br>
-            </div> -->
-            <!-- add submit button-->
-            <div id="submit">
-                <button type="submit" id="submitbtn">Submit</button>  
-
-
+        <h1><i class="fa-solid fa-dog fa-shake"></i>  HOW DO YOU WANT TO LET OUT YOUR DOG?  <i class="fa-solid fa-dog fa-shake"></i></h1>
+        
       <form data-abide novalidate>
-            <h1>How do you want to let out your dog?</h1>
-                      <div class="grid-x grid-margin-x">
-                        <div class="cell">
-                          <div data-abide-error class="alert callout" style="display: none;">
-                            <p><i class="fi-alert"></i> There are some errors in your form.</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="grid-x grid-margin-x">
+        <div class="transbox">
                         <div class="cell small-12">
-                          <label>Location:
+                          <label>LOCATION:
                             <input type="text" id="cityInput" placeholder="Seattle" aria-describedby="exampleHelpTextPassword" required >
-                            <span class="form-error">
-                              Please enter a location!
-                            </span>
-                          <p>Enter a location please!</p>
                           </label>
                         </div>
-                      </div>
                       <div class="cell medium-6">
-                        <label>How close are you looking?
+                        <label>HOW CLOSE?
                           <select id="select" required>
                             <option value=""></option>
                             <option value="1609">5 miles</option>
@@ -69,22 +46,22 @@
                           </select>
                         </label>
                       </div>
-                    </div>
-                      <div class="grid-x grid-margin-x">
-                          <label>What are you looking for?
+                      <div class="my-center">
+                          <label><div>WHAT ARE YOU LOOKING FOR?</div>
                         <fieldset>
-                          <input class="check" id="checkbox1" type="checkbox"><label for="checkbox1">Training</label>
-                          <input class="check"  id="checkbox2" type="checkbox" required><label for="checkbox2">Vets</label>
-                          <input class="check"  id="checkbox3" type="checkbox"><label for="checkbox3">Pet Stores</label>
-                          <input class="check"  id="checkbox4" type="checkbox"><label for="checkbox4">Parks and Trails</label>
+                          <input class="check" id="checkbox1" type="checkbox"><label for="checkbox1">  <i class="fa-solid fa-dog fa-bounce"></i>  Training</label>
+                          <input class="check" id="checkbox2" type="checkbox" required><label for="checkbox2"> <i class="fa-solid fa-bone"></i>   Vets</label>
+                          <input class="check" id="checkbox3" type="checkbox"><label for="checkbox3"> <i class="fa-solid fa-bowl-food"></i>   Pet Stores</label>
+                          <input class="check" id="checkbox4" type="checkbox"><label for="checkbox4"> <i class="fa-solid fa-paw"></i>    Parks and Trails</label>
                         </label>
                         </fieldset>
                       </div>
-                      <div class="grid-x grid-margin-x">
+                      <div class="my-center">
                         <fieldset class="cell medium-6">
                           <button class="button" type="button" id="cityInputSubmit" value="Submit">Submit</button>
                         </fieldset>
                       </div>
+                  </div>
                     </form>
         <div id="testVar"> 
 
@@ -92,21 +69,6 @@
         <div id="map"></div>
         <ul id="citylist">
         </ul>    
-    <i class="fa-solid fa-dog"></i>
-    <i class="fa-solid fa-dog fa-1x"></i>
-    <i class="fa-solid fa-dog fa-5x"></i>
-    <i class="fa-solid fa-dog fa-10x"></i>
-    <i class="fa-solid fa-dog fa-beat"></i>
-    <i class="fa-solid fa-dog fa-fade"></i>
-    <i class="fa-solid fa-dog fa-bounce"></i>
-    <i class="fa-solid fa-dog fa-flip"></i>
-    <i class="fa-solid fa-dog fa-shake"></i>
-    <i class="fa-solid fa-dog fa-spin"></i>
-    <i class="fa-solid fa-shield-dog"></i>
-    <i class="fa-solid fa-hotdog"></i>
-    <i class="fa-solid fa-bone"></i>
-    <i class="fa-solid fa-bowl-food"></i>
-    <i class="fa-solid fa-paw"></i>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
