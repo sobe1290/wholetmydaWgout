@@ -102,13 +102,5 @@ $("#cityInputSubmit").on("click", () => {
 })
 
 });
-
-
-
-
-let searchTerm = ''
-let selectedRadius = ''
-
-
-
-
+console.log('Latitutde:', lat)
+console.log('Longitude:' , long)
