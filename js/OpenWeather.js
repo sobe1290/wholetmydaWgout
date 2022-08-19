@@ -10,6 +10,11 @@ const mainDate = moment().format("MMM Do, YYYY");
 
 
 $("#cityInputSubmit").on("click", () => {
+
+  selectedRadius = $("select").val(); 
+
+  console.log(selectedRadius);
+
     if ($('#checkbox1').prop('checked')) {
         searchTerm = 'Dog Training';
     }
@@ -88,8 +93,8 @@ $("#cityInputSubmit").on("click", () => {
 
 
 
-let searchTerm = '' //Shep change this
-let selectedRadius = '500' //Shep change this
+let searchTerm = ''
+let selectedRadius = ''
 
 
 
