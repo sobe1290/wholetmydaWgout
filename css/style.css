@@ -15,9 +15,13 @@ body form {
 }
 h1 {
   font-family: 'oswald', sans-serif;
-  font-size: 60px;
+  font-size: 50px;
   text-align: center;
   background-color:white;
+  display: flex;
+  justify-content: center;
+  padding-top: 1%;
+  flex-wrap: wrap;
   height: 100px;
   width: 100%;
 }
@@ -118,4 +122,8 @@ position: absolute;
 word-spacing: 60px;
 top: 3px;
 text-align: center;
+}
+
+@media screen and (max-width: 1000px) {
+
 }
