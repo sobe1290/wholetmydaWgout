@@ -61,7 +61,7 @@ margin: 100px auto;
 .weatherCard{
 width: 400px;
 height: 200px;
-font-family: 'Open Sans';
+font-family: 'oswald';
 position: relative;
 }
 .currentTemp{
@@ -75,7 +75,8 @@ left: 0;
 .currentWeather{
 width: 180px;
 height: 200px;
-background: lightblue;
+background: rgba(61, 196, 241, 0.5);
+opacity: 1;
 margin: 0;
 position: absolute; 
 top: 0;
@@ -84,6 +85,7 @@ right: 0;
 .temp{
 font-size: 45px;
 text-align: center;
+vertical-align: middle;
 display: block;
 font-weight: 300;
 color: rgb(255, 255, 255);
@@ -99,31 +101,37 @@ display: block;
 }
 .conditions{
 font-family: weathericons;
-font-size: 80px;
-display: block;
-padding: 20px 0 0;
-text-align: center;
+font-size: xx-large;
+position: relative;
 }
+
 .info{
-width: 180px;
-height: 50px;
-position: absolute;
-bottom: 0;
-right: 0;
-background: rgb(42, 178, 234);
-font-weight: 700;
-color: rgb(255, 255, 255);
-}
+  width: 180px;
+  height: 50px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: rgb(42, 178, 234);
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  }
 
-.wind {
-width: 50%;
-right: -10px;
-position: absolute;
-word-spacing: 60px;
-top: 3px;
-text-align: center;
+  .wind {
+    width: 53%;
+    right: 12%;
+    position: absolute;
+    top: 3px;
+    display: flex;
+    text-align: center;
+  }
+  
+  img {
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    height: 70%;
+    margin-left: 12%;
 }
-
 @media screen and (max-width: 1000px) {
 
 }
