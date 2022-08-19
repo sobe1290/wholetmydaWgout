@@ -71,14 +71,14 @@ left: 0;
 .currentWeather{
 width: 180px;
 height: 200px;
-background: rgb(237, 237, 237);
+background: lightblue;
 margin: 0;
 position: absolute; 
 top: 0;
 right: 0;
 }
 .temp{
-font-size: 80px;
+font-size: 45px;
 text-align: center;
 display: block;
 font-weight: 300;
