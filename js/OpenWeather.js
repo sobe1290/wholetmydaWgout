@@ -1,9 +1,34 @@
 
+$(document).ready(function(){
+  $('.check').click(function() {
+      $('.check').not(this).prop('checked', false);
+  });
+});
+
 const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
 const mainDate = moment().format("MMM Do, YYYY");
 
 
 $("#cityInputSubmit").on("click", () => {
+
+  selectedRadius = $("select").val(); 
+
+  console.log(selectedRadius);
+
+    if ($('#checkbox1').prop('checked')) {
+        searchTerm = 'Dog Training';
+    }
+    
+    if ($('#checkbox2').prop('checked')) {
+        searchTerm = 'Veterinarian';
+    }
+    if ($('#checkbox3').prop('checked')) {
+        searchTerm = 'Pet Store';
+    }
+    if ($('#checkbox4').prop('checked')) {
+        searchTerm = 'Dog Park';
+    }
+    console.log(searchTerm)
     const cityName = $("#cityInput").val();
     $("#cityInput").val("");
     const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + apiKey
@@ -81,8 +106,8 @@ $("#cityInputSubmit").on("click", () => {
 
 
 
-let searchTerm = 'Veterinarian' //Shep change this
-let selectedRadius = '500' //Shep change this
+let searchTerm = ''
+let selectedRadius = ''
 
 
 
