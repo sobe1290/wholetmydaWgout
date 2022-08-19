@@ -48,7 +48,11 @@ $("#cityInputSubmit").on("click", () => {
     var humEl = $("<p>").text("Humidity: " + response.main.humidity);
     var windEl = $("<p>").text("Wind Speed: " + response.wind.speed);
     var currentweather = response.weather[0].main;
+    const {icon} = response.weather[0]
+    $('#weatherIcon').attr("src",'https://openweathermap.org/img/wn/'+ icon +'.png')
 
+    
+/* 
     if (currentweather === "Rain") {
         var currentIcon = $('<img>').attr("src", "http://openweathermap.org/img/wn/09d.png");
         currentIcon.attr("style", "height: 60px; width: 60px");
@@ -66,7 +70,7 @@ $("#cityInputSubmit").on("click", () => {
      else if (currentweather === "Snow") {
         var currentIcon = $('<img>').attr("src", "http://openweathermap.org/img/wn/13d.png");
         currentIcon.attr("style", "height: 60px; width: 60px");
-    }
+    }*/
     //appending to render on page
     var newDiv = $('<div>');
 
