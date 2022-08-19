@@ -47,15 +47,11 @@ $("#cityInputSubmit").on("click", () => {
     console.log('Longitude:' , long)
     console.log('Weather:' , weather)
 
-    var container =$("<h1>")
-    var container2 =$("<h1>")
     var container3 =$("<h1>")
     var container4 =$("<h1>")
-    container.text(long)
-    container2.text(lat)
     container3.text(weather)
     container4.text(temp)
-    $("#testVar").append(container,container2,container3,container4)
+    $("#testVar").append(container3,container4)
     
 
 
