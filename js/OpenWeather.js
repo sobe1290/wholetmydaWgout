@@ -46,10 +46,15 @@ $("#cityInputSubmit").on("click", () => {
     var displayMainDate = cityNameEl.append(" " + mainDate);
     var tempEL = $("<p>").text("Temperture: " + response.main.temp);
     var humEl = $("<p>").text("Humidity: " + response.main.humidity);
-    var windEl = $("<p>").text("Wind Speed: " + response.wind.speed);
     var currentweather = response.weather[0].main;
     const {icon} = response.weather[0]
+    const {speed} = response.wind;
+    const {temp} = response.main;
+    const {name} = response;
+    $("#weatherForCity").text(name);
     $('#weatherIcon').attr("src",'https://openweathermap.org/img/wn/'+ icon +'.png')
+    $('#windSpeed').text(speed+" MPH");
+    $("#currentTemp").text(temp + "°F");
 
     
 /* 
