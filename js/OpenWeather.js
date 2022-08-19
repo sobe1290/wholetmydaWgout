@@ -1,4 +1,7 @@
 
+var weatherEl = document.getElementById("testVar");
+weatherEl.style.display = "none";
+
 $(document).ready(function(){
   $('.check').click(function() {
       $('.check').not(this).prop('checked', false);
@@ -10,7 +13,7 @@ const mainDate = moment().format("MMM Do, YYYY");
 
 
 $("#cityInputSubmit").on("click", () => {
-
+  weatherEl.style.display = "block";
   selectedRadius = $("select").val(); 
 
   console.log(selectedRadius);
