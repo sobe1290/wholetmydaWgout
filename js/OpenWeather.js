@@ -47,12 +47,16 @@ $("#cityInputSubmit").on("click", () => {
     console.log('Longitude:' , long)
     console.log('Weather:' , weather)
 
-    var container3 =$("<h1>")
-    var container4 =$("<h1>")
-    container3.text(weather)
-    container4.text(temp)
-    $("#testVar").append(container3,container4)
+    var container3 =$("<h1>");
+    var container4 =$("<h1>");
+    container3.text(weather);
+    container4.text(temp);
     
+    $("#testVar").empty().append(container3,container4);
+     
+    });
+    // cityInfo = document.createElement("div");
+    // cityinfo.textcontent =
 
 
 
@@ -98,6 +102,5 @@ $("#cityInputSubmit").on("click", () => {
       }
 })
 
-});
-console.log('Latitutde:', lat)
-console.log('Longitude:' , long)
+
+
