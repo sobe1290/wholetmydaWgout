@@ -1,4 +1,10 @@
 
+$(document).ready(function(){
+  $('.check').click(function() {
+      $('.check').not(this).prop('checked', false);
+  });
+});
+
 const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
 const mainDate = moment().format("MMM Do, YYYY");
 
