@@ -35,12 +35,14 @@ $("#cityInputSubmit").on("click", () => {
         method: "GET" 
 
 }).then(function(response){
+  console.log(response.main.temp)
     console.log(response.weather)
     console.log(response.coord);
     console.log(URL);
     var lat = response.coord.lat;
     var long = response.coord.lon;
     var weather =response.weather[0].main;
+    var temp = response.main.temp;
     console.log('Latitutde:', lat)
     console.log('Longitude:' , long)
     console.log('Weather:' , weather)
@@ -48,10 +50,12 @@ $("#cityInputSubmit").on("click", () => {
     var container =$("<h1>")
     var container2 =$("<h1>")
     var container3 =$("<h1>")
+    var container4 =$("<h1>")
     container.text(long)
     container2.text(lat)
     container3.text(weather)
-    $("#testVar").append(container,container2,container3)
+    container4.text(temp)
+    $("#testVar").append(container,container2,container3,container4)
     
 
 
