@@ -13,8 +13,6 @@ $("#cityInputSubmit").on("click", () => {
 
   selectedRadius = $("select").val(); 
 
-  console.log(selectedRadius);
-
     if ($('#checkbox1').prop('checked')) {
         searchTerm = 'Dog Training';
     }
@@ -28,7 +26,6 @@ $("#cityInputSubmit").on("click", () => {
     if ($('#checkbox4').prop('checked')) {
         searchTerm = 'Dog Park';
     }
-    console.log(searchTerm)
     const cityName = $("#cityInput").val();
     $("#cityInput").val("");
     const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + apiKey
