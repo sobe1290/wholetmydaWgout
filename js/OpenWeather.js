@@ -40,8 +40,21 @@ $("#cityInputSubmit").on("click", () => {
     console.log(URL);
     var lat = response.coord.lat;
     var long = response.coord.lon;
+    var weather =response.weather[0].main;
     console.log('Latitutde:', lat)
     console.log('Longitude:' , long)
+    console.log('Weather:' , weather)
+
+    var container =$("<h1>")
+    var container2 =$("<h1>")
+    var container3 =$("<h1>")
+    container.text(long)
+    container2.text(lat)
+    container3.text(weather)
+    $("#testVar").append(container,container2,container3)
+    
+
+
 
     var map;
     var service;
@@ -86,13 +99,5 @@ $("#cityInputSubmit").on("click", () => {
 })
 
 });
-
-
-
-
-let searchTerm = ''
-let selectedRadius = ''
-
-
-
-
+console.log('Latitutde:', lat)
+console.log('Longitude:' , long)
