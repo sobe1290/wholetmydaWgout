@@ -33,6 +33,45 @@ $("#cityInputSubmit").on("click", () => {
     }
     console.log(searchTerm)
     const cityName = $("#cityInput").val();
+        /// **** stuff from Scott************
+        //local storage variables
+        var locationentered = JSON.parse(localStorage.getItem("textEntered")) || [];
+        locationentered.push(cityName);
+        localStorage.setItem("textEntered", JSON.stringify(locationentered));
+        var citylistEL = document.getElementById("citylist"); // container to place searched city name
+        var div = document.createElement("div");
+        var spanRefresh = document.createElement("span");
+        var spanClose = document.createElement("span");
+        var iFA = document.createElement("i");
+        var divChild1 = document.createElement("div");
+        var divChild2 = document.createElement("div");
+        var divChild3 = document.createElement("div");
+        var divChild4 = document.createElement("div");
+        var cityboxEl = $(`<div class="grid-x"></div>`);
+        var citylistHeaderEl = $(`<p>1</p>`);
+        citylistEL.append(div);
+        div.setAttribute("class","grid-x");
+        div.setAttribute("id","1");
+
+        var citylistRowEL = document.getElementById("1");
+        console.log(citylistRowEL);
+        citylistRowEL.append(divChild1)
+        divChild1.setAttribute("class","cell small-1");
+        divChild1.append(iFA);
+        iFA.setAttribute("Class","fa-solid fa-paw")
+        citylistRowEL.append(divChild2)
+        divChild2.setAttribute("class","cell small-9");
+        divChild2.textContent = cityName;
+        citylistRowEL.append(divChild3)
+        divChild3.setAttribute("class","cell small-1");
+        divChild3.append(spanRefresh);
+        spanRefresh.setAttribute("class","material-symbols-outlined");
+        spanRefresh.textContent = " refresh ";
+        citylistRowEL.append(divChild4)
+        divChild4.setAttribute("class","cell small-1");
+        divChild4.append(spanClose);
+        spanClose.setAttribute("class","material-symbols-outlined");
+        spanClose.textContent = " close ";
     $("#cityInput").val("");
     const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + apiKey+ "&units=imperial"
     const queryURLforcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=ecc0be5fd92206da3aa90cc41c13ca56";
