@@ -4,8 +4,8 @@
 var searchForm = document.querySelector(".navBar"); //search form
 var userLocation = document.querySelector("#userLocat"); // users Location
 var submitbtn = document.querySelector("#submitbtn");
-
-
+var mapEl = document.getElementById("map");
+mapEl.style.display = "none";
 
 
 /// **** stuff from Patrick************
@@ -40,6 +40,7 @@ for (let i = 0; i < 5 ; i++) { //textEntered.length
 }
     //Save textentered info to local storage
     cityInputSubmitEL.addEventListener("click", function(event) {
+        mapEl.style.display = "block";
         event.preventDefault();
         textEntered[i] = cityInputEL.value;
         localStorage.setItem("textEntered", JSON.stringify(textEntered));
