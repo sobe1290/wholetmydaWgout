@@ -60,8 +60,6 @@ button {
   text-align: center;
 }
 
-Result Skip Results Iframe
-EDIT ON
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
 @import url(https://cdnjs.cloudflare.com/ajax/libs/weather-icons/1.2/css/weather-icons.min.css);
 
@@ -99,7 +97,6 @@ right: 0;
 .temp{
 font-size: 45px;
 text-align: center;
-vertical-align: middle;
 display: block;
 font-weight: 300;
 color: rgb(255, 255, 255);
