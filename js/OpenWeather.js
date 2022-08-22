@@ -1,12 +1,7 @@
+//DOM variables
 var weatherEl = document.getElementById("testVar");
 weatherEl.style.display = "none";
-
-$(document).ready(function(){
-  $('.check').click(function() {
-      $('.check').not(this).prop('checked', false);
-  });
-});
-
+//global variables
 const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
 const mainDate = moment().format("MMM Do, YYYY");
 var locationentered = JSON.parse(localStorage.getItem("textEntered")) || [];
@@ -14,6 +9,14 @@ var cityName;
 var selectedRadius;
 var searchTerm;
 
+//function to make sure all boxes are unchecked at start up
+$(document).ready(function(){
+  $('.check').click(function() {
+      $('.check').not(this).prop('checked', false);
+  });
+});
+
+//function to grab user inputs such as location radius, pet criteria and the city name
 function mainTask() {
 $("#cityInputSubmit").on("click", () => {
   weatherEl.style.display = "block";
@@ -22,7 +25,7 @@ $("#cityInputSubmit").on("click", () => {
   var cityNameLocal = window.cityName || [];
   var selectedRadiusLocal = $("select").val() || [];
   console.log(window.selectedRadius);
-
+  //checking to see what the user checked for pet preference
     if ($('#checkbox1').prop('checked')) {
       window.searchTerm = 'Dog Training';
              searchTerm = 'Dog Training';
@@ -42,7 +45,6 @@ $("#cityInputSubmit").on("click", () => {
     }
     console.log(window.searchTerm);
 
-        /// **** stuff from Scott************
         //local storage variables
         cityNameLocal = $("#cityInput").val();
         const Object = {
@@ -60,14 +62,14 @@ $("#cityInputSubmit").on("click", () => {
         //update map and weather
         mapweatherTask();
 })};
-
+// function to use openweather MAP
 function mapweatherTask() {
     const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + window.cityName + apiKey+ "&units=imperial";
     const queryURLforcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + window.cityName + "&units=imperial&appid=ecc0be5fd92206da3aa90cc41c13ca56";
     $.ajax({
         url: URL,
         method: "GET" 
-
+//grabs data from Openweather API and puts it variables to use 
 }).then(function(response){
   console.log(response.main.temp)
     console.log(response.weather)
@@ -82,6 +84,7 @@ function mapweatherTask() {
     const {speed} = response.wind;
     const {temp} = response.main;
     const {name} = response;
+    //add the variables from OPEN weather to the webpage
     $("#weatherForCity").text(name);
     $('#weatherIcon').attr("src",'https://openweathermap.org/img/wn/'+ icon +'.png')
     $('#windSpeed').text(speed+" MPH");
@@ -92,7 +95,7 @@ function mapweatherTask() {
     var map;
     var service;
     var infowindow; 
-    
+    // fuction to use GOOGLE Maps API, using variables from weather API
     function initMap() {
         var geoLocation = new google.maps.LatLng(lat, long);
       
@@ -110,9 +113,9 @@ function mapweatherTask() {
         service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
       }
-
+      //running google map api function
       initMap();
-      
+      //function to check if marker has already been placed 
       function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
@@ -121,7 +124,7 @@ function mapweatherTask() {
           }
         }
       }
-      
+      //function to place markers on the map produced from google API
       function createMarker(place) {
       
           new google.maps.Marker({
@@ -137,6 +140,7 @@ function mapweatherTask() {
 };
 
 mainTask();
+//function to post the local storage variables to screen 
 function citylistMain() {
     //Clear list
     function removeAllChildNodes(parent) {
@@ -146,8 +150,8 @@ function citylistMain() {
     } 
     const citylist = document.querySelector('#citylist');
     removeAllChildNodes(citylist);
-    //Create new list
-    //locationentered = window.locationentered;
+    //Create new list with the users chosen city
+   
     locationentered = JSON.parse(localStorage.getItem("textEntered"));
     if (!locationentered) {
     } else {
