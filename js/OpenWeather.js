@@ -1,4 +1,3 @@
-citylistMain();
 var weatherEl = document.getElementById("testVar");
 weatherEl.style.display = "none";
 
@@ -12,7 +11,8 @@ const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
 const mainDate = moment().format("MMM Do, YYYY");
 var locationentered = JSON.parse(localStorage.getItem("textEntered")) || [];
 var cityName;
-console.log(cityName);
+
+function mainTask() {
 $("#cityInputSubmit").on("click", () => {
   weatherEl.style.display = "block";
   selectedRadius = $("select").val(); 
@@ -40,6 +40,7 @@ $("#cityInputSubmit").on("click", () => {
         locationentered.push(cityName);
         localStorage.setItem("textEntered", JSON.stringify(locationentered));
         $("#cityInput").val("");
+        cityName = "";
         function removeAllChildNodes(parent) {
           while (parent.firstChild) {
               parent.removeChild(parent.firstChild);
@@ -117,59 +118,68 @@ $("#cityInputSubmit").on("click", () => {
           });
       }
 })
-
 });
+};
+mainTask();
 function citylistMain() {
     locationentered = JSON.parse(localStorage.getItem("textEntered"));
     for (let i = 0; i < locationentered.length; i++) { 
-    var citylistEL = document.getElementById("citylist"); // container to place searched city name
-    var div = document.createElement("div");
-    var spanRefresh = document.createElement("span");
-    var spanClose = document.createElement("span");
-    var iFA = document.createElement("i");
-    var divChild1 = document.createElement("div");
-    var divChild2 = document.createElement("div");
-    var divChild3 = document.createElement("div");
-    var divChild4 = document.createElement("div");
-    citylistEL.append(div);
-    div.setAttribute("class","grid-x");
-    div.setAttribute("id",`row${i}`);
-    var citylistRowEL = document.getElementById(`row${i}`);
-    citylistRowEL.append(divChild1)
-    divChild1.setAttribute("class","cell small-1");
-    divChild1.append(iFA);
-    iFA.setAttribute("Class","fa-solid fa-paw")
-    citylistRowEL.append(divChild2)
-    divChild2.setAttribute("class","cell small-9");
-    divChild2.textContent = locationentered[i];
-    citylistRowEL.append(divChild3)
-    divChild3.setAttribute("class","cell small-1");
-    divChild3.append(spanRefresh);
-    spanRefresh.setAttribute("class","material-symbols-outlined");
-    spanClose.setAttribute("id",`refresh${i}`);
-    spanRefresh.textContent = " refresh ";
-    citylistRowEL.append(divChild4);
-    divChild4.setAttribute("class","cell small-1");
-    divChild4.append(spanClose);
-    spanClose.setAttribute("class","material-symbols-outlined");
-    spanClose.setAttribute("id",`close${i}`);
-    spanClose.textContent = " close ";
+      var citylistEL = document.getElementById("citylist"); // container to place searched city name
+      var div = document.createElement("div");
+      var spanRefresh = document.createElement("span");
+      var spanClose   = document.createElement("span");
+      var iFA = document.createElement("i");
+      var divChild1 = document.createElement("div");
+      var divChild2 = document.createElement("div");
+      var divChild3 = document.createElement("div");
+      var divChild4 = document.createElement("div");
+      citylistEL.append(div);
+      div.setAttribute("class","grid-x");
+      div.setAttribute("id",`row${i}`);
+      var citylistRowEL = document.getElementById(`row${i}`);
+      citylistRowEL.append(divChild1);
+      divChild1.setAttribute("class","cell small-1");
+      divChild1.append(iFA);
+      iFA.setAttribute("Class","fa-solid fa-paw")
+      citylistRowEL.append(divChild2);
+      divChild2.setAttribute("class","cell small-9");
+      divChild2.textContent = locationentered[i];
+      citylistRowEL.append(divChild3);
+      divChild3.setAttribute("class","cell small-1");
+      divChild3.append(spanRefresh);
+      spanRefresh.setAttribute("class","material-symbols-outlined");
+      spanRefresh.setAttribute("id",`refresh${i}`);
+      spanRefresh.textContent = " refresh ";
+      citylistRowEL.append(divChild4);
+      divChild4.setAttribute("class","cell small-1");
+      divChild4.append(spanClose);
+      spanClose.setAttribute("class","material-symbols-outlined");
+      spanClose.setAttribute("id",`close${i}`);
+      spanClose.textContent = " close ";
 
+      document.querySelector(`#refresh${i}`).addEventListener("click", function(event) {
+        event.preventDefault();
+        cityName = locationentered[i];
+        $("#cityInput").val(`${locationentered[i]}`);
+        mainTask();
+        cityName = "";
+        $("#cityInput").val("");
+      });
       document.querySelector(`#close${i}`).addEventListener("click", function(event) {
-      event.preventDefault();
-      var counti = 0;
-      function removeAllChildNodes(parent) {
-          while (parent.firstChild) {
-              parent.removeChild(parent.firstChild);
+        event.preventDefault();
+        var counti = 0;
+        function removeAllChildNodes(parent) {
+            while (parent.firstChild) {
+                parent.removeChild(parent.firstChild);
+              }
             }
-          }
-        var row = document.querySelector(`#row${i}`);
-        removeAllChildNodes(row);
-        row.remove();
-        locationentered.splice(i-counti,1);
-        counti++;
-        localStorage.setItem("textEntered", JSON.stringify(locationentered));
-        console.log(counti);
-        }); 
+          var row = document.querySelector(`#row${i}`);
+          removeAllChildNodes(row);
+          row.remove();
+          locationentered.splice(i-counti,1);
+          counti++;
+          localStorage.setItem("textEntered", JSON.stringify(locationentered));
+      }); 
     }
 };
+citylistMain();
