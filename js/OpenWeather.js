@@ -69,6 +69,7 @@ function mapweatherTask() {
         method: "GET" 
 
 }).then(function(response){
+  weatherEl.style.display = "block";
   console.log(response.main.temp)
     console.log(response.weather)
     console.log(response.coord);
