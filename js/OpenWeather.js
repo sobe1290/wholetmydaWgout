@@ -19,18 +19,16 @@ $(document).ready(function(){
 //function to grab user inputs such as location radius, pet criteria and the city name
 function mainTask() {
 $("#cityInputSubmit").on("click", () => {
-
   window.selectedRadius = $("select").val(); 
   var locationenteredLocal = window.locationentered || [];
   var cityNameLocal = window.cityName || [];
   var selectedRadiusLocal = $("select").val() || [];
-  console.log(window.selectedRadius);
+
   //checking to see what the user checked for pet preference
     if ($('#checkbox1').prop('checked')) {
       window.searchTerm = 'Dog Training';
              searchTerm = 'Dog Training';
     }
-    
     if ($('#checkbox2').prop('checked')) {
       window.searchTerm = 'Veterinarian';
              searchTerm = 'Veterinarian';
@@ -43,8 +41,6 @@ $("#cityInputSubmit").on("click", () => {
       window.searchTerm = 'Dog Park';
              searchTerm = 'Dog Park';
     }
-    console.log(window.searchTerm);
-
         //local storage variables
         cityNameLocal = $("#cityInput").val();
         const Object = {
@@ -72,10 +68,6 @@ function mapweatherTask() {
 //grabs data from Openweather API and puts it variables to use 
 }).then(function(response){
   weatherEl.style.display = "block";
-  console.log(response.main.temp)
-    console.log(response.weather)
-    console.log(response.coord);
-    console.log(URL);
     var cityNameEl = $("<h2>").text(response.name);
     var displayMainDate = cityNameEl.append(" " + mainDate);
     var tempEL = $("<p>").text("Temperture: " + response.main.temp);
@@ -99,18 +91,14 @@ function mapweatherTask() {
     // fuction to use GOOGLE Maps API, using variables from weather API
     function initMap() {
         var geoLocation = new google.maps.LatLng(lat, long);
-      
         infowindow = new google.maps.InfoWindow();
-      
         map = new google.maps.Map(
             document.getElementById('map'), {center: geoLocation, zoom: 13});
-      
         var request = {
           location: geoLocation,
           radius: window.selectedRadius,
           query: window.searchTerm,
         };
-      
         service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
       }
@@ -133,10 +121,6 @@ function mapweatherTask() {
               map: map
           });
       }
-      console.log("It worked!");
-      console.log(window.cityName);
-      console.log(window.selectedRadius);
-      console.log(window.searchTerm);
 })
 };
 
@@ -151,8 +135,8 @@ function citylistMain() {
     } 
     const citylist = document.querySelector('#citylist');
     removeAllChildNodes(citylist);
+
     //Create new list with the users chosen city
-   
     locationentered = JSON.parse(localStorage.getItem("textEntered"));
     if (!locationentered) {
     } else {
@@ -213,8 +197,6 @@ function citylistMain() {
           locationentered.splice(i,1);
           localStorage.setItem("textEntered", JSON.stringify(locationentered));
           citylistMain()
-          console.log(i);
-          console.log(locationentered);
       }); 
     }
   }
