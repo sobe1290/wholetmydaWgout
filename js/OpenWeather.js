@@ -19,7 +19,7 @@ $(document).ready(function(){
 //function to grab user inputs such as location radius, pet criteria and the city name
 function mainTask() {
 $("#cityInputSubmit").on("click", () => {
-  weatherEl.style.display = "block";
+
   window.selectedRadius = $("select").val(); 
   var locationenteredLocal = window.locationentered || [];
   var cityNameLocal = window.cityName || [];
@@ -71,6 +71,7 @@ function mapweatherTask() {
         method: "GET" 
 //grabs data from Openweather API and puts it variables to use 
 }).then(function(response){
+  weatherEl.style.display = "block";
   console.log(response.main.temp)
     console.log(response.weather)
     console.log(response.coord);
