@@ -9,7 +9,7 @@ var cityName;
 var selectedRadius;
 var searchTerm;
 
-//function to make sure all boxes are unchecked at start up
+//function to make sure only one checkbox can be selected at a time
 $(document).ready(function(){
   $('.check').click(function() {
       $('.check').not(this).prop('checked', false);
@@ -61,18 +61,12 @@ $("#cityInputSubmit").on("click", () => {
 // function to use openweather MAP
 function mapweatherTask() {
     const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + window.cityName + apiKey+ "&units=imperial";
-    const queryURLforcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + window.cityName + "&units=imperial&appid=ecc0be5fd92206da3aa90cc41c13ca56";
     $.ajax({
         url: URL,
         method: "GET" 
 //grabs data from Openweather API and puts it variables to use 
 }).then(function(response){
   weatherEl.style.display = "block";
-    var cityNameEl = $("<h2>").text(response.name);
-    var displayMainDate = cityNameEl.append(" " + mainDate);
-    var tempEL = $("<p>").text("Temperture: " + response.main.temp);
-    var humEl = $("<p>").text("Humidity: " + response.main.humidity);
-    var currentweather = response.weather[0].main;
     const {icon} = response.weather[0]
     const {speed} = response.wind;
     const {temp} = response.main;
@@ -160,9 +154,6 @@ function citylistMain() {
       iFA.setAttribute("Class","fa-solid fa-paw")
       citylistRowEL.append(divChild2);
       divChild2.setAttribute("class","cell small-9");
-      var City = Object.values(locationentered[i])[0];
-      var Radius = Object.values(locationentered[i])[1];
-      var MapItem = Object.values(locationentered[i])[2];
       divChild2.textContent = `City: ${Object.values(locationentered[i])[0]}, Radius: ${Object.values(locationentered[i])[1]}, MapItem: ${Object.values(locationentered[i])[2]}`;
       citylistRowEL.append(divChild3);
       divChild3.setAttribute("class","cell small-1");
