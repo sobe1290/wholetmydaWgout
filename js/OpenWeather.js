@@ -55,14 +55,6 @@ $("#cityInputSubmit").on("click", () => {
         window.locationentered = locationenteredLocal;
         window.cityName = cityNameLocal;
         window.selectedRadius = selectedRadiusLocal;
-        //Clear list
-        function removeAllChildNodes(parent) {
-          while (parent.firstChild) {
-              parent.removeChild(parent.firstChild);
-          }
-        } 
-        const citylist = document.querySelector('#citylist');
-        removeAllChildNodes(citylist);
         //Add stored list
         citylistMain();
         //update map and weather
@@ -146,8 +138,16 @@ function mapweatherTask() {
 
 mainTask();
 function citylistMain() {
-//Create new list
-    locationentered = window.locationentered;
+    //Clear list
+    function removeAllChildNodes(parent) {
+      while (parent.firstChild) {
+          parent.removeChild(parent.firstChild);
+      }
+    } 
+    const citylist = document.querySelector('#citylist');
+    removeAllChildNodes(citylist);
+    //Create new list
+    //locationentered = window.locationentered;
     locationentered = JSON.parse(localStorage.getItem("textEntered"));
     if (!locationentered) {
     } else {
@@ -207,8 +207,8 @@ function citylistMain() {
           row.remove();
           locationentered.splice(i,1);
           localStorage.setItem("textEntered", JSON.stringify(locationentered));
+          citylistMain()
           console.log(i);
-
           console.log(locationentered);
       }); 
     }
