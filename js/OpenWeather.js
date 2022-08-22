@@ -11,36 +11,37 @@ const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
 const mainDate = moment().format("MMM Do, YYYY");
 var locationentered = JSON.parse(localStorage.getItem("textEntered")) || [];
 var cityName;
+var selectedRadius;
+var searchTerm;
 
 function mainTask() {
 $("#cityInputSubmit").on("click", () => {
   weatherEl.style.display = "block";
-  selectedRadius = $("select").val(); 
+  window.selectedRadius = $("select").val(); 
 
-  console.log(selectedRadius);
+  console.log(window.selectedRadius);
 
     if ($('#checkbox1').prop('checked')) {
-        searchTerm = 'Dog Training';
+      window.searchTerm = 'Dog Training';
     }
     
     if ($('#checkbox2').prop('checked')) {
-        searchTerm = 'Veterinarian';
+      window.searchTerm = 'Veterinarian';
     }
     if ($('#checkbox3').prop('checked')) {
-        searchTerm = 'Pet Store';
+      window.searchTerm = 'Pet Store';
     }
     if ($('#checkbox4').prop('checked')) {
-        searchTerm = 'Dog Park';
+      window.searchTerm = 'Dog Park';
     }
-    console.log(searchTerm)
+    console.log(window.searchTerm);
 
         /// **** stuff from Scott************
         //local storage variables
-        cityName = $("#cityInput").val();
-        locationentered.push(cityName);
+        window.cityName = $("#cityInput").val();       
+        locationentered.push(window.cityName);
         localStorage.setItem("textEntered", JSON.stringify(locationentered));
-        $("#cityInput").val("");
-        cityName = "";
+        //Clear list
         function removeAllChildNodes(parent) {
           while (parent.firstChild) {
               parent.removeChild(parent.firstChild);
@@ -48,10 +49,14 @@ $("#cityInputSubmit").on("click", () => {
         } 
         const citylist = document.querySelector('#citylist');
         removeAllChildNodes(citylist);
+        //Add stored list
         citylistMain();
-
-    const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + apiKey+ "&units=imperial"
-    const queryURLforcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=ecc0be5fd92206da3aa90cc41c13ca56";
+        //update map and weather
+        mapweatherTask();
+})};
+function mapweatherTask() {
+    const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + window.cityName + apiKey+ "&units=imperial";
+    const queryURLforcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + window.cityName + "&units=imperial&appid=ecc0be5fd92206da3aa90cc41c13ca56";
     $.ajax({
         url: URL,
         method: "GET" 
@@ -91,8 +96,8 @@ $("#cityInputSubmit").on("click", () => {
       
         var request = {
           location: geoLocation,
-          radius: selectedRadius,
-          query: searchTerm,
+          radius: window.selectedRadius,
+          query: window.searchTerm,
         };
       
         service = new google.maps.places.PlacesService(map);
@@ -118,10 +123,11 @@ $("#cityInputSubmit").on("click", () => {
           });
       }
 })
-});
 };
+
 mainTask();
 function citylistMain() {
+//Create new list
     locationentered = JSON.parse(localStorage.getItem("textEntered"));
     for (let i = 0; i < locationentered.length; i++) { 
       var citylistEL = document.getElementById("citylist"); // container to place searched city name
@@ -149,7 +155,7 @@ function citylistMain() {
       divChild3.append(spanRefresh);
       spanRefresh.setAttribute("class","material-symbols-outlined");
       spanRefresh.setAttribute("id",`refresh${i}`);
-      spanRefresh.textContent = " refresh ";
+      spanRefresh.textContent = ""; //" refresh "
       citylistRowEL.append(divChild4);
       divChild4.setAttribute("class","cell small-1");
       divChild4.append(spanClose);
@@ -157,14 +163,17 @@ function citylistMain() {
       spanClose.setAttribute("id",`close${i}`);
       spanClose.textContent = " close ";
 
-      document.querySelector(`#refresh${i}`).addEventListener("click", function(event) {
-        event.preventDefault();
-        cityName = locationentered[i];
-        $("#cityInput").val(`${locationentered[i]}`);
-        mainTask();
-        cityName = "";
-        $("#cityInput").val("");
-      });
+      // document.querySelector(`#refresh${i}`).addEventListener("click", function(event) {
+      //   event.preventDefault();
+      //   window.cityName = locationentered[i];
+      //   $("#cityInput").val(`${locationentered[i]}`);
+      //   mapweatherTask();
+      //   //window.cityName = "";
+      //   //$("#cityInput").val("");
+      //   console.log("It worked!");
+      //   console.log($("#cityInput").val());
+      //   console.log(window.cityName);
+      // });
       document.querySelector(`#close${i}`).addEventListener("click", function(event) {
         event.preventDefault();
         var counti = 0;
