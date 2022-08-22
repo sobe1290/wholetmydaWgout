@@ -174,7 +174,6 @@ function citylistMain() {
       var City = Object.values(locationentered[i])[0];
       var Radius = Object.values(locationentered[i])[1];
       var MapItem = Object.values(locationentered[i])[2];
-          console.log(locationentered[i])
       divChild2.textContent = `City: ${Object.values(locationentered[i])[0]}, Radius: ${Object.values(locationentered[i])[1]}, MapItem: ${Object.values(locationentered[i])[2]}`;
       citylistRowEL.append(divChild3);
       divChild3.setAttribute("class","cell small-1");
@@ -195,12 +194,9 @@ function citylistMain() {
         window.selectedRadius = Object.values(locationentered[i])[1];
         window.searchTerm = Object.values(locationentered[i])[2];
         mapweatherTask();
-        //window.cityName = "";
-        //$("#cityInput").val("");
       });
       document.querySelector(`#close${i}`).addEventListener("click", function(event) {
         event.preventDefault();
-        var counti = 0;
         function removeAllChildNodes(parent) {
             while (parent.firstChild) {
                 parent.removeChild(parent.firstChild);
@@ -209,9 +205,11 @@ function citylistMain() {
           var row = document.querySelector(`#row${i}`);
           removeAllChildNodes(row);
           row.remove();
-          locationentered.splice(i-counti,1);
-          counti++;
+          locationentered.splice(i,1);
           localStorage.setItem("textEntered", JSON.stringify(locationentered));
+          console.log(i);
+
+          console.log(locationentered);
       }); 
     }
   }
