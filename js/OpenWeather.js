@@ -16,7 +16,7 @@ var searchTerm;
 
 function mainTask() {
 $("#cityInputSubmit").on("click", () => {
-  weatherEl.style.display = "block";
+
   window.selectedRadius = $("select").val(); 
   var locationenteredLocal = window.locationentered || [];
   var cityNameLocal = window.cityName || [];
