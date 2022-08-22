@@ -20,31 +20,41 @@ $("#cityInputSubmit").on("click", () => {
   window.selectedRadius = $("select").val(); 
   var locationenteredLocal = window.locationentered || [];
   var cityNameLocal = window.cityName || [];
+  var selectedRadiusLocal = $("select").val() || [];
   console.log(window.selectedRadius);
 
     if ($('#checkbox1').prop('checked')) {
       window.searchTerm = 'Dog Training';
+             searchTerm = 'Dog Training';
     }
     
     if ($('#checkbox2').prop('checked')) {
       window.searchTerm = 'Veterinarian';
+             searchTerm = 'Veterinarian';
     }
     if ($('#checkbox3').prop('checked')) {
       window.searchTerm = 'Pet Store';
+             searchTerm = 'Pet Store';
     }
     if ($('#checkbox4').prop('checked')) {
       window.searchTerm = 'Dog Park';
+             searchTerm = 'Dog Park';
     }
     console.log(window.searchTerm);
 
         /// **** stuff from Scott************
         //local storage variables
-        cityNameLocal = $("#cityInput").val();       
-        locationenteredLocal.push(cityNameLocal);
+        cityNameLocal = $("#cityInput").val();
+        const Object = {
+          City: `${cityNameLocal}`,
+          Radius: selectedRadiusLocal,
+          MapItem: searchTerm,
+        }
+        locationenteredLocal.push(Object);
         localStorage.setItem("textEntered", JSON.stringify(locationenteredLocal));
         window.locationentered = locationenteredLocal;
         window.cityName = cityNameLocal;
-
+        window.selectedRadius = selectedRadiusLocal;
         //Clear list
         function removeAllChildNodes(parent) {
           while (parent.firstChild) {
@@ -127,6 +137,10 @@ function mapweatherTask() {
               map: map
           });
       }
+      console.log("It worked!");
+      console.log(window.cityName);
+      console.log(window.selectedRadius);
+      console.log(window.searchTerm);
 })
 };
 
@@ -157,13 +171,17 @@ function citylistMain() {
       iFA.setAttribute("Class","fa-solid fa-paw")
       citylistRowEL.append(divChild2);
       divChild2.setAttribute("class","cell small-9");
-      divChild2.textContent = locationentered[i];
+      var City = Object.values(locationentered[i])[0];
+      var Radius = Object.values(locationentered[i])[1];
+      var MapItem = Object.values(locationentered[i])[2];
+          console.log(locationentered[i])
+      divChild2.textContent = `City: ${Object.values(locationentered[i])[0]}, Radius: ${Object.values(locationentered[i])[1]}, MapItem: ${Object.values(locationentered[i])[2]}`;
       citylistRowEL.append(divChild3);
       divChild3.setAttribute("class","cell small-1");
       divChild3.append(spanRefresh);
       spanRefresh.setAttribute("class","material-symbols-outlined");
       spanRefresh.setAttribute("id",`refresh${i}`);
-      spanRefresh.textContent = ""; //" refresh "
+      spanRefresh.textContent = " refresh "; //
       citylistRowEL.append(divChild4);
       divChild4.setAttribute("class","cell small-1");
       divChild4.append(spanClose);
@@ -171,17 +189,15 @@ function citylistMain() {
       spanClose.setAttribute("id",`close${i}`);
       spanClose.textContent = " close ";
 
-      // document.querySelector(`#refresh${i}`).addEventListener("click", function(event) {
-      //   event.preventDefault();
-      //   window.cityName = locationentered[i];
-      //   $("#cityInput").val(`${locationentered[i]}`);
-      //   mapweatherTask();
-      //   //window.cityName = "";
-      //   //$("#cityInput").val("");
-      //   console.log("It worked!");
-      //   console.log($("#cityInput").val());
-      //   console.log(window.cityName);
-      // });
+      document.querySelector(`#refresh${i}`).addEventListener("click", function(event) {
+        event.preventDefault();
+        window.cityName = Object.values(locationentered[i])[0];
+        window.selectedRadius = Object.values(locationentered[i])[1];
+        window.searchTerm = Object.values(locationentered[i])[2];
+        mapweatherTask();
+        //window.cityName = "";
+        //$("#cityInput").val("");
+      });
       document.querySelector(`#close${i}`).addEventListener("click", function(event) {
         event.preventDefault();
         var counti = 0;
