@@ -74,8 +74,18 @@ $("#cityInputSubmit").on("click", () => {
     $('#windSpeed').text(speed+" MPH");
     $("#currentTemp").text(temp + "°F");
 
+<<<<<<< HEAD
     var lat = response.coord.lat;
     var long = response.coord.lon;
+=======
+    
+   
+
+    var lat = response.coord.lat;
+    var long = response.coord.lon;
+    
+
+>>>>>>> 11fd108aa3c3dc778d221fb42dd90605c26d2708
     var map;
     var service;
     var infowindow; 
@@ -119,7 +129,6 @@ $("#cityInputSubmit").on("click", () => {
 })
 
 });
-
 function citylistMain() {
     locationentered = JSON.parse(localStorage.getItem("textEntered"));
     for (let i = 0; i < locationentered.length; i++) { 
