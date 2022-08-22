@@ -2,12 +2,9 @@
 #map {
   height: 400px;
   /* The height is 400 pixels */
-  width: 35%;
+  width: 92%;
   /* The width is the width of the web page */
-  box-shadow: 10px 10px 5px grey;
-
-  margin-left: 150px;
-  margin-bottom: 150px;
+  margin: 0% 4% 4% 4%;
 }
 body form {
   font-family: 'oswald', sans-serif;
