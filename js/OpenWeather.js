@@ -11,7 +11,8 @@ $(document).ready(function(){
 const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
 const mainDate = moment().format("MMM Do, YYYY");
 var locationentered = JSON.parse(localStorage.getItem("textEntered")) || [];
-
+var cityName;
+console.log(cityName);
 $("#cityInputSubmit").on("click", () => {
   weatherEl.style.display = "block";
   selectedRadius = $("select").val(); 
@@ -35,7 +36,7 @@ $("#cityInputSubmit").on("click", () => {
 
         /// **** stuff from Scott************
         //local storage variables
-        var cityName = $("#cityInput").val();
+        cityName = $("#cityInput").val();
         locationentered.push(cityName);
         localStorage.setItem("textEntered", JSON.stringify(locationentered));
         $("#cityInput").val("");
@@ -73,6 +74,10 @@ $("#cityInputSubmit").on("click", () => {
     $('#windSpeed').text(speed+" MPH");
     $("#currentTemp").text(temp + "°F");
 
+<<<<<<< HEAD
+    var lat = response.coord.lat;
+    var long = response.coord.lon;
+=======
     
    
 
@@ -80,6 +85,7 @@ $("#cityInputSubmit").on("click", () => {
     var long = response.coord.lon;
     
 
+>>>>>>> 11fd108aa3c3dc778d221fb42dd90605c26d2708
     var map;
     var service;
     var infowindow; 
@@ -150,6 +156,7 @@ function citylistMain() {
     divChild3.setAttribute("class","cell small-1");
     divChild3.append(spanRefresh);
     spanRefresh.setAttribute("class","material-symbols-outlined");
+    spanClose.setAttribute("id",`refresh${i}`);
     spanRefresh.textContent = " refresh ";
     citylistRowEL.append(divChild4);
     divChild4.setAttribute("class","cell small-1");
