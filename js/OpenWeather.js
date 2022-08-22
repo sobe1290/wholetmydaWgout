@@ -1,46 +1,77 @@
-
+//DOM variables
 var weatherEl = document.getElementById("testVar");
 weatherEl.style.display = "none";
+//global variables
+const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
+const mainDate = moment().format("MMM Do, YYYY");
+var locationentered = JSON.parse(localStorage.getItem("textEntered")) || [];
+var cityName;
+var selectedRadius;
+var searchTerm;
 
+//function to make sure all boxes are unchecked at start up
 $(document).ready(function(){
   $('.check').click(function() {
       $('.check').not(this).prop('checked', false);
   });
 });
 
-const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
-const mainDate = moment().format("MMM Do, YYYY");
-
-
+//function to grab user inputs such as location radius, pet criteria and the city name
+function mainTask() {
 $("#cityInputSubmit").on("click", () => {
-  weatherEl.style.display = "block";
-  selectedRadius = $("select").val(); 
 
-  console.log(selectedRadius);
-
+  window.selectedRadius = $("select").val(); 
+  var locationenteredLocal = window.locationentered || [];
+  var cityNameLocal = window.cityName || [];
+  var selectedRadiusLocal = $("select").val() || [];
+  console.log(window.selectedRadius);
+  //checking to see what the user checked for pet preference
     if ($('#checkbox1').prop('checked')) {
-        searchTerm = 'Dog Training';
+      window.searchTerm = 'Dog Training';
+             searchTerm = 'Dog Training';
     }
     
     if ($('#checkbox2').prop('checked')) {
-        searchTerm = 'Veterinarian';
+      window.searchTerm = 'Veterinarian';
+             searchTerm = 'Veterinarian';
     }
     if ($('#checkbox3').prop('checked')) {
-        searchTerm = 'Pet Store';
+      window.searchTerm = 'Pet Store';
+             searchTerm = 'Pet Store';
     }
     if ($('#checkbox4').prop('checked')) {
-        searchTerm = 'Dog Park';
+      window.searchTerm = 'Dog Park';
+             searchTerm = 'Dog Park';
     }
-    console.log(searchTerm)
-    const cityName = $("#cityInput").val();
-    $("#cityInput").val("");
-    const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + apiKey+ "&units=imperial"
-    const queryURLforcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=ecc0be5fd92206da3aa90cc41c13ca56";
+    console.log(window.searchTerm);
+
+        //local storage variables
+        cityNameLocal = $("#cityInput").val();
+        const Object = {
+          City: `${cityNameLocal}`,
+          Radius: selectedRadiusLocal,
+          MapItem: searchTerm,
+        }
+        locationenteredLocal.push(Object);
+        localStorage.setItem("textEntered", JSON.stringify(locationenteredLocal));
+        window.locationentered = locationenteredLocal;
+        window.cityName = cityNameLocal;
+        window.selectedRadius = selectedRadiusLocal;
+        //Add stored list
+        citylistMain();
+        //update map and weather
+        mapweatherTask();
+})};
+// function to use openweather MAP
+function mapweatherTask() {
+    const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + window.cityName + apiKey+ "&units=imperial";
+    const queryURLforcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + window.cityName + "&units=imperial&appid=ecc0be5fd92206da3aa90cc41c13ca56";
     $.ajax({
         url: URL,
         method: "GET" 
-
+//grabs data from Openweather API and puts it variables to use 
 }).then(function(response){
+  weatherEl.style.display = "block";
   console.log(response.main.temp)
     console.log(response.weather)
     console.log(response.coord);
@@ -54,89 +85,18 @@ $("#cityInputSubmit").on("click", () => {
     const {speed} = response.wind;
     const {temp} = response.main;
     const {name} = response;
+    //add the variables from OPEN weather to the webpage
     $("#weatherForCity").text(name);
     $('#weatherIcon').attr("src",'https://openweathermap.org/img/wn/'+ icon +'.png')
     $('#windSpeed').text(speed+" MPH");
     $("#currentTemp").text(temp + "°F");
 
-    
-/* 
-    if (currentweather === "Rain") {
-        var currentIcon = $('<img>').attr("src", "http://openweathermap.org/img/wn/09d.png");
-        currentIcon.attr("style", "height: 60px; width: 60px");
-    } else if (currentweather=== "Clouds") {
-        var currentIcon = $('<img>').attr("src", "http://openweathermap.org/img/wn/03d.png");
-        currentIcon.attr("style", "height: 60px; width: 60px");
-    } else if (currentweather === "Clear") {
-        var currentIcon = $('<img>').attr("src", "http://openweathermap.org/img/wn/01d.png");
-        currentIcon.attr("style", "height: 60px; width: 60px");
-    }
-     else if (currentweather === "Drizzle") {
-        var currentIcon = $('<img>').attr("src", "http://openweathermap.org/img/wn/10d.png");
-        currentIcon.attr("style", "height: 60px; width: 60px");
-    }
-     else if (currentweather === "Snow") {
-        var currentIcon = $('<img>').attr("src", "http://openweathermap.org/img/wn/13d.png");
-        currentIcon.attr("style", "height: 60px; width: 60px");
-    }*/
-    //appending to render on page
-    var newDiv = $('<div>');
-
-    newDiv.append(displayMainDate, currentIcon, tempEL, humEl, windEl);
-
-    $("#testVar").html(newDiv);
-
-    // var lat = response.coord.lat;
-    // var long = response.coord.lon;
-    // var weather =response.weather[0].main;
-    // var temp = response.main.temp;
-    // console.log('Latitutde:', lat)
-    // console.log('Longitude:' , long)
-    // console.log('Weather:' , weather)
-
-    // var container3 =$("<h1>")
-    // var container4 =$("<h1>")
-    // var icon =$('01D')
-    // container3.text(weather)
-    // container4.text(temp)
-    // $("#testVar").append(container3,container4)
-    
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${inputVal}&appid=${apiKey}&units=metric`;
-
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      const { main, name, sys, weather } = data;
-      const icon = `https://s3-us-west-2.amazonaws.com/s.cdpn.io/162656/${
-        weather[0]["icon"]
-      }.svg`;
-
-      const li = document.createElement("li");
-      li.classList.add("city");
-      const markup = `
-        <h2 class="city-name" data-name="${name},${sys.weather}">
-          <span>${name}</span>
-          <sup>${sys.Weather}</sup>
-        </h2>
-        <div class="city-temp">${Math.round(main.temp)}<sup>°C</sup></div>
-        <figure>
-          <img class="city-icon" src="${icon}" alt="${
-        weather[0]["description"]
-      }">
-          <figcaption>${weather[0]["description"]}</figcaption>
-        </figure>
-      `;
-      li.innerHTML = markup;
-      list.appendChild(li);
-    })
-    
-
-
-
+    var lat = response.coord.lat;
+    var long = response.coord.lon;
     var map;
     var service;
     var infowindow; 
-    
+    // fuction to use GOOGLE Maps API, using variables from weather API
     function initMap() {
         var geoLocation = new google.maps.LatLng(lat, long);
       
@@ -147,16 +107,16 @@ $("#cityInputSubmit").on("click", () => {
       
         var request = {
           location: geoLocation,
-          radius: selectedRadius,
-          query: searchTerm,
+          radius: window.selectedRadius,
+          query: window.searchTerm,
         };
       
         service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
       }
-
+      //running google map api function
       initMap();
-      
+      //function to check if marker has already been placed 
       function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
@@ -165,7 +125,7 @@ $("#cityInputSubmit").on("click", () => {
           }
         }
       }
-      
+      //function to place markers on the map produced from google API
       function createMarker(place) {
       
           new google.maps.Marker({
@@ -173,8 +133,90 @@ $("#cityInputSubmit").on("click", () => {
               map: map
           });
       }
+      console.log("It worked!");
+      console.log(window.cityName);
+      console.log(window.selectedRadius);
+      console.log(window.searchTerm);
 })
+};
 
-});
-console.log('Latitutde:', lat)
-console.log('Longitude:' , long)
+mainTask();
+//function to post the local storage variables to screen 
+function citylistMain() {
+    //Clear list
+    function removeAllChildNodes(parent) {
+      while (parent.firstChild) {
+          parent.removeChild(parent.firstChild);
+      }
+    } 
+    const citylist = document.querySelector('#citylist');
+    removeAllChildNodes(citylist);
+    //Create new list with the users chosen city
+   
+    locationentered = JSON.parse(localStorage.getItem("textEntered"));
+    if (!locationentered) {
+    } else {
+    for (let i = 0; i < locationentered.length; i++) { 
+      var citylistEL = document.getElementById("citylist"); // container to place searched city name
+      var div = document.createElement("div");
+      var spanRefresh = document.createElement("span");
+      var spanClose   = document.createElement("span");
+      var iFA = document.createElement("i");
+      var divChild1 = document.createElement("div");
+      var divChild2 = document.createElement("div");
+      var divChild3 = document.createElement("div");
+      var divChild4 = document.createElement("div");
+      citylistEL.append(div);
+      div.setAttribute("class","grid-x");
+      div.setAttribute("id",`row${i}`);
+      var citylistRowEL = document.getElementById(`row${i}`);
+      citylistRowEL.append(divChild1);
+      divChild1.setAttribute("class","cell small-1");
+      divChild1.append(iFA);
+      iFA.setAttribute("Class","fa-solid fa-paw")
+      citylistRowEL.append(divChild2);
+      divChild2.setAttribute("class","cell small-9");
+      var City = Object.values(locationentered[i])[0];
+      var Radius = Object.values(locationentered[i])[1];
+      var MapItem = Object.values(locationentered[i])[2];
+      divChild2.textContent = `City: ${Object.values(locationentered[i])[0]}, Radius: ${Object.values(locationentered[i])[1]}, MapItem: ${Object.values(locationentered[i])[2]}`;
+      citylistRowEL.append(divChild3);
+      divChild3.setAttribute("class","cell small-1");
+      divChild3.append(spanRefresh);
+      spanRefresh.setAttribute("class","material-symbols-outlined");
+      spanRefresh.setAttribute("id",`refresh${i}`);
+      spanRefresh.textContent = " refresh "; //
+      citylistRowEL.append(divChild4);
+      divChild4.setAttribute("class","cell small-1");
+      divChild4.append(spanClose);
+      spanClose.setAttribute("class","material-symbols-outlined");
+      spanClose.setAttribute("id",`close${i}`);
+      spanClose.textContent = " close ";
+
+      document.querySelector(`#refresh${i}`).addEventListener("click", function(event) {
+        event.preventDefault();
+        window.cityName = Object.values(locationentered[i])[0];
+        window.selectedRadius = Object.values(locationentered[i])[1];
+        window.searchTerm = Object.values(locationentered[i])[2];
+        mapweatherTask();
+      });
+      document.querySelector(`#close${i}`).addEventListener("click", function(event) {
+        event.preventDefault();
+        function removeAllChildNodes(parent) {
+            while (parent.firstChild) {
+                parent.removeChild(parent.firstChild);
+              }
+            }
+          var row = document.querySelector(`#row${i}`);
+          removeAllChildNodes(row);
+          row.remove();
+          locationentered.splice(i,1);
+          localStorage.setItem("textEntered", JSON.stringify(locationentered));
+          citylistMain()
+          console.log(i);
+          console.log(locationentered);
+      }); 
+    }
+  }
+};
+citylistMain();
