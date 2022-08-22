@@ -18,7 +18,8 @@ function mainTask() {
 $("#cityInputSubmit").on("click", () => {
   weatherEl.style.display = "block";
   window.selectedRadius = $("select").val(); 
-
+  var locationenteredLocal = window.locationentered || [];
+  var cityNameLocal = window.cityName || [];
   console.log(window.selectedRadius);
 
     if ($('#checkbox1').prop('checked')) {
@@ -38,9 +39,12 @@ $("#cityInputSubmit").on("click", () => {
 
         /// **** stuff from Scott************
         //local storage variables
-        window.cityName = $("#cityInput").val();       
-        locationentered.push(window.cityName);
-        localStorage.setItem("textEntered", JSON.stringify(locationentered));
+        cityNameLocal = $("#cityInput").val();       
+        locationenteredLocal.push(cityNameLocal);
+        localStorage.setItem("textEntered", JSON.stringify(locationenteredLocal));
+        window.locationentered = locationenteredLocal;
+        window.cityName = cityNameLocal;
+
         //Clear list
         function removeAllChildNodes(parent) {
           while (parent.firstChild) {
@@ -54,6 +58,7 @@ $("#cityInputSubmit").on("click", () => {
         //update map and weather
         mapweatherTask();
 })};
+
 function mapweatherTask() {
     const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + window.cityName + apiKey+ "&units=imperial";
     const queryURLforcast = "https://api.openweathermap.org/data/2.5/forecast?q=" + window.cityName + "&units=imperial&appid=ecc0be5fd92206da3aa90cc41c13ca56";
@@ -128,7 +133,10 @@ function mapweatherTask() {
 mainTask();
 function citylistMain() {
 //Create new list
+    locationentered = window.locationentered;
     locationentered = JSON.parse(localStorage.getItem("textEntered"));
+    if (!locationentered) {
+    } else {
     for (let i = 0; i < locationentered.length; i++) { 
       var citylistEL = document.getElementById("citylist"); // container to place searched city name
       var div = document.createElement("div");
@@ -190,5 +198,6 @@ function citylistMain() {
           localStorage.setItem("textEntered", JSON.stringify(locationentered));
       }); 
     }
+  }
 };
 citylistMain();
