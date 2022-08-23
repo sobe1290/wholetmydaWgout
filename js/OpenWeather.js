@@ -67,7 +67,7 @@ function mapweatherTask() {
         method: "GET" 
 //grabs data from Openweather API and puts it variables to use 
 }).then(function(response){
-  weatherEl.style.display = "block";
+    weatherEl.style.display = "block";
     var cityNameEl = $("<h2>").text(response.name);
     var displayMainDate = cityNameEl.append(" " + mainDate);
     var tempEL = $("<p>").text("Temperture: " + response.main.temp);
@@ -163,7 +163,7 @@ function citylistMain() {
       var City = Object.values(locationentered[i])[0];
       var Radius = Object.values(locationentered[i])[1];
       var MapItem = Object.values(locationentered[i])[2];
-      divChild2.textContent = `City: ${Object.values(locationentered[i])[0]}, Radius: ${Object.values(locationentered[i])[1]}, MapItem: ${Object.values(locationentered[i])[2]}`;
+      divChild2.textContent = `City: ${Object.values(locationentered[i])[0]}, Radius: ${(Object.values(locationentered[i])[1]/1609.34).toFixed(0)} Miles, MapItem: ${Object.values(locationentered[i])[2]}`;
       citylistRowEL.append(divChild3);
       divChild3.setAttribute("class","cell small-1");
       divChild3.append(spanRefresh);
