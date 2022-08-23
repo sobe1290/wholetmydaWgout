@@ -15,6 +15,7 @@
 <body>
 
   <style> 
+  /* this controlls main styling for website */
   body {
      background-image: url(https://newevolutiondesigns.com/images/freebies/4k-dog-wallpaper-1.jpg);
      background-repeat: no-repeat;
@@ -23,18 +24,21 @@
     background-size: cover;
         }
   </style>
-    <aside class="sideBar">
-        <div id="container">
-        <h1><i class="fa-solid fa-dog fa-shake"></i>HOW DO YOU WANT TO LET OUT YOUR DOG?<i class="fa-solid fa-dog fa-shake"></i></h1>
-        
-      <form data-abide novalidate>
+        <header id="container">
+          <h1><i class="fa-solid fa-dog fa-shake"></i>HOW DO YOU WANT TO LET OUT YOUR DOG?<i class="fa-solid fa-dog fa-shake"></i></h1>
+        </header>
+        <main>
+          <!-- main form to grab the user inputs-->
+          <form data-abide novalidate>
         <div class="transbox">
                         <div class="cell small-12">
+                          <!-- grab user location-->
                           <label>LOCATION:
                             <input type="text" id="cityInput" placeholder="Seattle" aria-describedby="exampleHelpTextPassword" required >
                           </label>
                         </div>
                       <div class="cell medium-6">
+                        <!--grab radius of search-->
                         <label>HOW CLOSE?
                           <select id="select" required>
                             <option value=""></option>
@@ -47,6 +51,7 @@
                         </label>
                       </div>
                       <div class="my-center">
+                        <!-- grab criteria for pet activity-->
                           <label><div>WHAT ARE YOU LOOKING FOR?</div>
                         <fieldset>
                           <input class="check" id="checkbox1" type="checkbox"><label for="checkbox1">  <i class="fa-solid fa-dog fa-bounce"></i>  Training</label>
@@ -63,6 +68,7 @@
                       </div>
                   </div>
                     </form>
+                    <!-- holds the weather forecast from weather API-->
         <div id="testVar">
             <div id="weather_wrapper">
               <div class="weatherCard">
@@ -80,9 +86,11 @@
             </div>
 
         </div>
+        <!-- empty divs to hold google map api-->
         <div id="map"></div>
+        <!--empty div to hold local storage information for users-->
         <div class="transbox" id="citylist"></div>    
-
+        </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
