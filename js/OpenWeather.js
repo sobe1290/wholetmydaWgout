@@ -154,7 +154,7 @@ function citylistMain() {
       iFA.setAttribute("Class","fa-solid fa-paw")
       citylistRowEL.append(divChild2);
       divChild2.setAttribute("class","cell small-9");
-      divChild2.textContent = `City: ${Object.values(locationentered[i])[0]}, Radius: ${Object.values(locationentered[i])[1]}, MapItem: ${Object.values(locationentered[i])[2]}`;
+      divChild2.textContent = `City: ${Object.values(locationentered[i])[0]}, Radius: ${(Object.values(locationentered[i])[1]/1609.344).toFixed(0)} miles, MapItem: ${Object.values(locationentered[i])[2]}`;
       citylistRowEL.append(divChild3);
       divChild3.setAttribute("class","cell small-1");
       divChild3.append(spanRefresh);
