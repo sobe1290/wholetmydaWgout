@@ -46,7 +46,7 @@ $("#cityInputSubmit").on("click", () => {
 })};
 // function to use openweather MAP
 function mapweatherTask(selectedRadius, cityName, searchTerm) {
-  var weatherEl = document.getElementById("testVar");
+  const weatherEl = document.getElementById("testVar");
       weatherEl.style.display = "none";
   const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
   // let cityname;
@@ -67,18 +67,18 @@ function mapweatherTask(selectedRadius, cityName, searchTerm) {
     $('#windSpeed').text(speed+" MPH");
     $("#currentTemp").text(temp + "°F");
 
-    var lat = response.coord.lat;
-    var long = response.coord.lon;
-    var map;
-    var service;
-    var infowindow; 
+    let lat = response.coord.lat;
+    let long = response.coord.lon;
+    let map;
+    let service;
+    let infowindow; 
     // fuction to use GOOGLE Maps API, using variables from weather API
     function initMap() {
-        var geoLocation = new google.maps.LatLng(lat, long);
+        let geoLocation = new google.maps.LatLng(lat, long);
         infowindow = new google.maps.InfoWindow();
         map = new google.maps.Map(
             document.getElementById('map'), {center: geoLocation, zoom: 13});
-        var request = {
+        let request = {
           location: geoLocation,
           radius: selectedRadius,
           query: searchTerm,
@@ -92,7 +92,7 @@ function mapweatherTask(selectedRadius, cityName, searchTerm) {
       function callback(results, status) {
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (var i = 0; i < results.length; i++) {
-            var place = results[i];
+            let place = results[i];
             createMarker(results[i]);
           }
         }
