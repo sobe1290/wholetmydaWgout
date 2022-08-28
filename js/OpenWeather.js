@@ -1,13 +1,6 @@
-//DOM variables
-var weatherEl = document.getElementById("testVar");
-weatherEl.style.display = "none";
 //global variables
-const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
 const mainDate = moment().format("MMM Do, YYYY");
 var locationentered = JSON.parse(localStorage.getItem("textEntered")) || [];
-var cityName;
-var selectedRadius;
-var searchTerm;
 
 //function to make sure only one checkbox can be selected at a time
 $(document).ready(function(){
@@ -19,48 +12,45 @@ $(document).ready(function(){
 //function to grab user inputs such as location radius, pet criteria and the city name
 function mainTask() {
 $("#cityInputSubmit").on("click", () => {
-  window.selectedRadius = $("select").val(); 
-  var locationenteredLocal = window.locationentered || [];
-  var cityNameLocal = window.cityName || [];
-  var selectedRadiusLocal = $("select").val() || [];
+  let selectedRadius = $("select").val();
+  let cityName;
+  let locationentered = JSON.parse(localStorage.getItem("textEntered")) || [];
 
   //checking to see what the user checked for pet preference
     if ($('#checkbox1').prop('checked')) {
-      window.searchTerm = 'Dog Training';
              searchTerm = 'Dog Training';
     }
     if ($('#checkbox2').prop('checked')) {
-      window.searchTerm = 'Veterinarian';
              searchTerm = 'Veterinarian';
     }
     if ($('#checkbox3').prop('checked')) {
-      window.searchTerm = 'Pet Store';
              searchTerm = 'Pet Store';
     }
     if ($('#checkbox4').prop('checked')) {
-      window.searchTerm = 'Dog Park';
              searchTerm = 'Dog Park';
     }
         //local storage variables
-        cityNameLocal = $("#cityInput").val();
+        cityName = $("#cityInput").val();
         const Object = {
-          City: `${cityNameLocal}`,
-          Radius: selectedRadiusLocal,
+          City: `${cityName}`,
+          Radius: selectedRadius,
           MapItem: searchTerm,
         }
-        locationenteredLocal.push(Object);
-        localStorage.setItem("textEntered", JSON.stringify(locationenteredLocal));
-        window.locationentered = locationenteredLocal;
-        window.cityName = cityNameLocal;
-        window.selectedRadius = selectedRadiusLocal;
+        locationentered.push(Object);
+        localStorage.setItem("textEntered", JSON.stringify(locationentered));
+        console.log(locationentered);
         //Add stored list
-        citylistMain();
+        citylistMain(selectedRadius, cityName, searchTerm);
         //update map and weather
-        mapweatherTask();
+        mapweatherTask(selectedRadius, cityName, searchTerm);
 })};
 // function to use openweather MAP
-function mapweatherTask() {
-    const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + window.cityName + apiKey+ "&units=imperial";
+function mapweatherTask(selectedRadius, cityName, searchTerm) {
+  var weatherEl = document.getElementById("testVar");
+      weatherEl.style.display = "none";
+  const apiKey = "&appid=9f103066ad2690dfc98026104a1b9e25"
+  // let cityname;
+    const URL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + apiKey+ "&units=imperial";
     $.ajax({
         url: URL,
         method: "GET" 
@@ -90,8 +80,8 @@ function mapweatherTask() {
             document.getElementById('map'), {center: geoLocation, zoom: 13});
         var request = {
           location: geoLocation,
-          radius: window.selectedRadius,
-          query: window.searchTerm,
+          radius: selectedRadius,
+          query: searchTerm,
         };
         service = new google.maps.places.PlacesService(map);
         service.textSearch(request, callback);
@@ -109,7 +99,6 @@ function mapweatherTask() {
       }
       //function to place markers on the map produced from google API
       function createMarker(place) {
-      
           new google.maps.Marker({
               position: place.geometry.location,
               map: map
@@ -120,7 +109,7 @@ function mapweatherTask() {
 
 mainTask();
 //function to post the local storage variables to screen 
-function citylistMain() {
+function citylistMain(selectedRadius, cityName, searchTerm) {
     //Clear list
     function removeAllChildNodes(parent) {
       while (parent.firstChild) {
@@ -135,19 +124,19 @@ function citylistMain() {
     if (!locationentered) {
     } else {
     for (let i = 0; i < locationentered.length; i++) { 
-      var citylistEL = document.getElementById("citylist"); // container to place searched city name
-      var div = document.createElement("div");
-      var spanRefresh = document.createElement("span");
-      var spanClose   = document.createElement("span");
-      var iFA = document.createElement("i");
-      var divChild1 = document.createElement("div");
-      var divChild2 = document.createElement("div");
-      var divChild3 = document.createElement("div");
-      var divChild4 = document.createElement("div");
+      let citylistEL = document.getElementById("citylist"); // container to place searched city name
+      let div = document.createElement("div");
+      let spanRefresh = document.createElement("span");
+      let spanClose   = document.createElement("span");
+      let iFA = document.createElement("i");
+      let divChild1 = document.createElement("div");
+      let divChild2 = document.createElement("div");
+      let divChild3 = document.createElement("div");
+      let divChild4 = document.createElement("div");
       citylistEL.append(div);
       div.setAttribute("class","grid-x");
       div.setAttribute("id",`row${i}`);
-      var citylistRowEL = document.getElementById(`row${i}`);
+      let citylistRowEL = document.getElementById(`row${i}`);
       citylistRowEL.append(divChild1);
       divChild1.setAttribute("class","cell small-1");
       divChild1.append(iFA);
@@ -170,10 +159,10 @@ function citylistMain() {
 
       document.querySelector(`#refresh${i}`).addEventListener("click", function(event) {
         event.preventDefault();
-        window.cityName = Object.values(locationentered[i])[0];
-        window.selectedRadius = Object.values(locationentered[i])[1];
-        window.searchTerm = Object.values(locationentered[i])[2];
-        mapweatherTask();
+        cityName = Object.values(locationentered[i])[0];
+        selectedRadius = Object.values(locationentered[i])[1];
+        searchTerm = Object.values(locationentered[i])[2];
+        mapweatherTask(selectedRadius, cityName, searchTerm);
       });
       document.querySelector(`#close${i}`).addEventListener("click", function(event) {
         event.preventDefault();
@@ -182,12 +171,12 @@ function citylistMain() {
                 parent.removeChild(parent.firstChild);
               }
             }
-          var row = document.querySelector(`#row${i}`);
+          let row = document.querySelector(`#row${i}`);
           removeAllChildNodes(row);
           row.remove();
           locationentered.splice(i,1);
           localStorage.setItem("textEntered", JSON.stringify(locationentered));
-          citylistMain()
+          citylistMain();
       }); 
     }
   }
