@@ -23,5 +23,6 @@ https://sobe1290.github.io/wholetmydaWgout/
 
 Below is a screenshot of what the page looks like:
 
-(insert screenshot here, lolz)
+
+![screenshot](https://user-images.githubusercontent.com/26222624/186046025-c9b6abd9-78ed-42d2-8641-351393f77a38.png)
 
